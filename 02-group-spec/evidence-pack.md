@@ -4,7 +4,7 @@ Nộp kèm thin SPEC cuối Day 05.
 
 ## 1. Nhóm và track
 
-**Tên nhóm:** [Nhóm điền tên tại đây]  
+**Tên nhóm:** Budget Travel AI
 **Track:** Travel and Hospitality  
 **Product/app đã chọn:**  Trợ lý thiết kế Tour phù hợp với ngân sách người dùng  
 **Build slice đang nghĩ:** Tính toán tổ hợp chi phí và gợi ý lịch trình, xử lý cảnh báo vượt ngân sách.
