@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phân tích sản phẩm AI - Moni (MoMo)</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --primary:#6C3CF0;
+    --secondary:#F5F3FF;
+    --text:#1E293B;
+    --gray:#64748B;
+    --border:#E2E8F0;
+    --success:#DCFCE7;
+    --warning:#FEF3C7;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#f8fafc;
+    color:var(--text);
+    line-height:1.7;
+}
+
+.hero{
+    background:linear-gradient(135deg,#6C3CF0,#8B5CF6);
+    color:white;
+    padding:70px 20px;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:48px;
+    font-weight:800;
+    margin-bottom:12px;
+}
+
+.hero p{
+    font-size:18px;
+    opacity:.95;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+.card{
+    background:white;
+    border-radius:18px;
+    padding:32px;
+    margin-bottom:28px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+h2{
+    color:var(--primary);
+    margin-bottom:20px;
+    font-size:30px;
+}
+
+h3{
+    margin-top:24px;
+    margin-bottom:12px;
+    font-size:22px;
+}
+
+h4{
+    margin-top:15px;
+    margin-bottom:8px;
+}
+
+ul{
+    padding-left:22px;
+}
+
+li{
+    margin-bottom:8px;
+}
+
+.quote{
+    background:#f8fafc;
+    border-left:5px solid var(--primary);
+    padding:18px;
+    border-radius:10px;
+    margin:15px 0;
+    font-style:italic;
+}
+
+.flow{
+    background:#0F172A;
+    color:#E2E8F0;
+    padding:25px;
+    border-radius:14px;
+    overflow:auto;
+    font-family:Consolas, monospace;
+    white-space:pre-wrap;
+}
+
+.highlight{
+    background:var(--secondary);
+    border:1px solid #ddd6fe;
+    padding:20px;
+    border-radius:12px;
+    margin-top:15px;
+}
+
+.success{
+    background:var(--success);
+    padding:18px;
+    border-radius:12px;
+    margin-top:15px;
+}
+
+.warning{
+    background:var(--warning);
+    padding:18px;
+    border-radius:12px;
+    margin-top:15px;
+}
+
+.two-col{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+}
+
+.table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+.table th{
+    background:#f1f5f9;
+}
+
+.table th,
+.table td{
+    border:1px solid var(--border);
+    padding:12px;
+    text-align:left;
+}
+
+.badge{
+    display:inline-block;
+    background:#ede9fe;
+    color:#6C3CF0;
+    padding:6px 14px;
+    border-radius:999px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+.footer{
+    text-align:center;
+    color:var(--gray);
+    padding:40px;
+}
+
+.cover-image{
+    width:100%;
+    border-radius:16px;
+    margin-top:20px;
+}
+
+@media(max-width:768px){
+    .hero h1{
+        font-size:34px;
+    }
+
+    .two-col{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<section class="hero">
+    <h1>🤖 Phân tích sản phẩm AI: Moni (MoMo)</h1>
+    <p>Workshop cá nhân - Đánh giá trải nghiệm hiện tại và đề xuất cải tiến sản phẩm AI</p>
+</section>
+
+<div class="container">
+
+    <div class="card">
+        <span class="badge">1. App được chọn</span>
+        <h2>Moni - Trợ lý AI của MoMo</h2>
+
+        <img
+        class="cover-image"
+        src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200"
+        alt="AI Assistant">
+
+        <div class="highlight">
+            <strong>Promise</strong>
+            <p>
+                Moni được giới thiệu là trợ lý AI giúp người dùng tương tác với dữ liệu tài chính cá nhân
+                bằng ngôn ngữ tự nhiên, hỗ trợ tra cứu giao dịch, theo dõi chi tiêu,
+                kiểm tra hóa đơn và các tác vụ tài chính trong hệ sinh thái MoMo.
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <span class="badge">2. Dùng thử thực tế</span>
+
+        <h3>Query 1</h3>
+
+        <div class="quote">
+            "Tháng trước mình thanh toán bao nhiêu tiền?"
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>Thông tin</th>
+                <th>Kết quả</th>
+            </tr>
+            <tr>
+                <td>Tổng thanh toán</td>
+                <td>987.139đ</td>
+            </tr>
+            <tr>
+                <td>Số giao dịch</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>Chi tiêu trung bình</td>
+                <td>31.843đ/ngày</td>
+            </tr>
+        </table>
+
+        <h3>Query 2</h3>
+
+        <div class="quote">
+            "Tháng này mình cần thanh toán bao nhiêu tiền?"
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>Hóa đơn</th>
+                <th>Số tiền</th>
+            </tr>
+            <tr>
+                <td>Điện lực miền Bắc</td>
+                <td>491.065đ</td>
+            </tr>
+            <tr>
+                <td>Điện lực miền Bắc</td>
+                <td>248.681đ</td>
+            </tr>
+            <tr>
+                <td>Điện lực miền Bắc</td>
+                <td>195.282đ</td>
+            </tr>
+            <tr>
+                <td>Điện lực miền Bắc</td>
+                <td>98.565đ</td>
+            </tr>
+        </table>
+
+        <div class="success">
+            <strong>Tổng cần thanh toán:</strong> 1.033.593đ
+        </div>
+    </div>
+
+    <div class="card">
+        <span class="badge">3. Đánh giá trải nghiệm hiện tại</span>
+
+        <h2>Những gì Moni làm tốt</h2>
+
+        <ul>
+            <li>✅ Hiểu ngôn ngữ tự nhiên rất tốt.</li>
+            <li>✅ Tổng hợp dữ liệu nhanh chóng.</li>
+            <li>✅ Giảm thao tác tìm kiếm thủ công.</li>
+            <li>✅ Trình bày kết quả ngắn gọn và dễ hiểu.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+
+        <span class="badge">4. As-Is Flow</span>
+
+        <div class="flow">
+User hỏi:
+"Tháng này mình cần thanh toán bao nhiêu tiền?"
+
+        ↓
+
+Moni hiểu ý định
+
+        ↓
+
+Moni truy xuất dữ liệu
+
+        ↓
+
+Moni trả về:
+- Tổng số tiền
+- Danh sách hóa đơn
+
+        ↓
+
+Kết thúc hội thoại
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <span class="badge">5. Weak Path</span>
+
+        <h2>Điểm người dùng bị kẹt</h2>
+
+        <div class="warning">
+            Người dùng nhận được dữ liệu nhưng không nhận được insight hoặc gợi ý hành động tiếp theo.
+        </div>
+
+        <h3>Các câu hỏi người dùng có thể tiếp tục đặt ra</h3>
+
+        <ul>
+            <li>Khoản nào chiếm tỷ trọng lớn nhất?</li>
+            <li>Chi phí tăng hay giảm so với tháng trước?</li>
+            <li>Có dấu hiệu bất thường không?</li>
+            <li>Có cách tiết kiệm điện không?</li>
+            <li>Nên ưu tiên thanh toán hóa đơn nào trước?</li>
+        </ul>
+
+        <div class="flow">
+Có dữ liệu
+      ↓
+Không có insight
+      ↓
+Không có khuyến nghị
+      ↓
+Người dùng rời cuộc hội thoại
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <span class="badge">6. Root Cause</span>
+
+        <h2>Nguyên nhân gốc rễ</h2>
+
+        <div class="two-col">
+
+            <div class="highlight">
+                <h3>Hiện tại</h3>
+
+                <div class="flow">
+User hỏi
+    ↓
+AI trả lời
+    ↓
+Kết thúc
+                </div>
+            </div>
+
+            <div class="success">
+                <h3>Nên hướng tới</h3>
+
+                <div class="flow">
+User hỏi
+    ↓
+AI trả lời
+    ↓
+AI phân tích
+    ↓
+AI đề xuất
+    ↓
+Tiếp tục hội thoại
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <span class="badge">7. To-Be Flow</span>
+
+        <div class="flow">
+User hỏi:
+"Tháng này mình cần thanh toán bao nhiêu tiền?"
+
+        ↓
+
+Moni truy xuất dữ liệu
+
+        ↓
+
+Trả về:
+1.033.593đ
+
+        ↓
+
+Tạo Insight
+
+- Hóa đơn lớn nhất chiếm 47%
+- Chi phí điện tăng 12%
+
+        ↓
+
+Đề xuất hành động
+
+[Phân tích nguyên nhân tăng]
+
+[Gợi ý tiết kiệm điện]
+
+[Đặt lịch nhắc thanh toán]
+
+[Xem xu hướng 3 tháng]
+
+        ↓
+
+Người dùng tiếp tục tương tác
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <span class="badge">8. Lợi ích</span>
+
+        <div class="two-col">
+
+            <div>
+                <h3>👤 Đối với người dùng</h3>
+
+                <ul>
+                    <li>Nhận insight thay vì chỉ dữ liệu.</li>
+                    <li>Có gợi ý hành động cụ thể.</li>
+                    <li>Quản lý tài chính hiệu quả hơn.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>🏢 Đối với MoMo</h3>
+
+                <ul>
+                    <li>Tăng Session Duration.</li>
+                    <li>Tăng Engagement.</li>
+                    <li>Tăng tần suất sử dụng Moni.</li>
+                    <li>Tăng giá trị cảm nhận của AI.</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <span class="badge">9. Product Decision</span>
+
+        <h2>Đề xuất sản phẩm</h2>
+
+        <div class="highlight">
+            <strong>
+                Sau mỗi truy vấn liên quan đến chi tiêu hoặc hóa đơn,
+                Moni nên tự động tạo insight và đề xuất các hành động tiếp theo
+                phù hợp với ngữ cảnh thay vì chỉ trả về dữ liệu.
+            </strong>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <span class="badge">10. Ví dụ trải nghiệm mong muốn</span>
+
+        <h3>Hiện tại</h3>
+
+        <div class="quote">
+            User: "Tháng này mình cần thanh toán bao nhiêu tiền?"
+            <br><br>
+            Moni: "Bạn cần thanh toán 1.033.593đ"
+        </div>
+
+        <h3>Đề xuất</h3>
+
+        <div class="quote">
+            Moni:
+            <br><br>
+            • Bạn cần thanh toán tổng cộng 1.033.593đ.
+            <br>
+            • Hóa đơn lớn nhất là 491.065đ, chiếm gần một nửa tổng chi phí.
+            <br>
+            • Chi phí điện tăng 12% so với tháng trước.
+            <br><br>
+
+            Bạn muốn tôi:
+            <br>
+            ✓ Phân tích nguyên nhân tăng
+            <br>
+            ✓ Gợi ý tiết kiệm điện
+            <br>
+            ✓ Đặt lịch nhắc thanh toán
+        </div>
+
+    </div>
+
+</div>
+
+<div class="footer">
+    Workshop AI Product Review • Moni (MoMo) • 2026
+</div>
+
+</body>
+</html>
