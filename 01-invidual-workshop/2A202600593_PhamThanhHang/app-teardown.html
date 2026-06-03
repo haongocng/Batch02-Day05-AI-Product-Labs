@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo Cáo Khảo Sát Thử Nghiệm V-AI (V-App) — Phạm Thanh Hằng</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #3b82f6;
+            --secondary: #f59e0b;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --bg-slide: #ffffff;
+            --bg-app: #f8fafc;
+            --border-color: #e2e8f0;
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-app);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* SIDEBAR WITH SCROLL FIX */
+        .sidebar {
+            width: 320px;
+            background-color: #0f172a;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 28px 20px;
+            z-index: 10;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        .brand {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .brand h2 {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #f8fafc;
+            margin-bottom: 6px;
+        }
+        .brand p {
+            font-size: 11px;
+            color: var(--primary-light);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            flex-grow: 1;
+            margin-bottom: 30px;
+        }
+
+        .nav-item {
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            color: #94a3b8;
+            user-select: none;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #f1f5f9;
+        }
+
+        .nav-item.active {
+            background-color: var(--primary-light);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            font-weight: 600;
+        }
+
+        .author-info {
+            border-top: 1px solid #1e293b;
+            padding-top: 20px;
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: auto;
+        }
+        .author-info p { margin-bottom: 4px; }
+        .author-info strong { color: #facc15; font-weight: 600; }
+
+        /* Main Content Slide Area */
+        .main-content {
+            flex-grow: 1;
+            position: relative;
+            background-color: var(--bg-app);
+            padding: 40px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide {
+            display: none;
+            background: var(--bg-slide);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            min-height: calc(100vh - 180px);
+            margin-bottom: 60px;
+        }
+
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.35s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography Inside Slides */
+        .slide-header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 18px;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-header h1 {
+            font-size: 26px;
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        .slide-tag {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin: 28px 0 14px 0;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        p {
+            line-height: 1.65;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        /* Elements Styling */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-light);
+            padding: 22px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 20px;
+        }
+
+        .card.danger { border-left-color: var(--danger); background: #fef2f2; }
+        .card.success { border-left-color: var(--success); background: #f0fdf4; }
+        .card.warning { border-left-color: var(--secondary); background: #fffbeb; }
+
+        .card h4 {
+            margin-bottom: 10px;
+            color: #0f172a;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Table Design */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14.5px;
+        }
+
+        th, td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        tr:hover { background-color: #f8fafc; }
+
+        /* Code/Prompt blocks */
+        .prompt-box {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 18px;
+            border-radius: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            margin-bottom: 18px;
+        }
+
+        /* Flowchart Visualizer */
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .flow-step i.step-icon {
+            background: var(--primary-light);
+            color: white;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 14px;
+            margin: -4px 0;
+        }
+
+        /* Navigation Buttons */
+        .slide-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 40px;
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .btn-ctrl {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 12px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.2s;
+            color: var(--text-main);
+        }
+
+        .btn-ctrl:hover {
+            background: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="brand">
+            <h2>Mổ App AI Thật</h2>
+            <p>V-App — V-AI Teardown</p>
+        </div>
+        
+        <ul class="nav-menu">
+            <li class="nav-item active" onclick="goToSlide(0)"><i class="fa-solid fa-circle-info"></i> Tổng quan & Kỳ vọng</li>
+            <li class="nav-item" onclick="goToSlide(1)"><i class="fa-solid fa-comments"></i> Kịch bản chat thực tế</li>
+            <li class="nav-item" onclick="goToSlide(2)"><i class="fa-solid fa-triangle-exclamation"></i> Hành vi & Điểm gãy</li>
+            <li class="nav-item" onclick="goToSlide(3)"><i class="fa-solid fa-route"></i> Ma trận Luồng (4 Paths)</li>
+            <li class="nav-item" onclick="goToSlide(4)"><i class="fa-solid fa-lightbulb"></i> Quyết định Product</li>
+            <li class="nav-item" onclick="goToSlide(5)"><i class="fa-solid fa-diagram-project"></i> Thiết kế Luồng To-Be</li>
+            <li class="nav-item" onclick="goToSlide(6)"><i class="fa-solid fa-file-lines"></i> Đề xuất đổi Product Spec</li>
+        </ul>
+
+        <div class="author-info">
+            <p>Người thực hiện:</p>
+            <strong>Phạm Thanh Hằng</strong>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <div class="main-content">
+
+        <!-- SLIDE 1: TỔNG QUAN -->
+        <div class="slide active">
+            <div class="slide-header">
+                <h1>1. Tổng Quan & Kỳ Vọng Hệ Sinh Thái</h1>
+                <span class="slide-tag">Định vị chiến lược</span>
+            </div>
+            <p><strong>Sản phẩm phân tích:</strong> Tính năng Trợ lý thông minh V-AI tích hợp bên trong ứng dụng V-App (Hệ sinh thái thông minh Vinhomes / Vingroup).</p>
+            
+            <div class="card warning">
+                <h4><i class="fa-solid fa-bullseye"></i> Kỳ vọng ban đầu từ User</h4>
+                <p>Với vai trò là trợ lý thuộc hệ sinh thái lớn, V-AI được kỳ vọng sẽ kết nối dữ liệu trực tiếp (1st-party data) để giải quyết nhanh gọn các tiện ích nội khu như: Đặt sân thể thao tự động, số hóa thủ tục cư dân và thanh toán hóa đơn hành chính tức thì mà không cần qua nhiều bước trung gian thủ công.</p>
+            </div>
+
+            <h3>Nhóm tác vụ khảo sát thực tế</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tác vụ (Task)</th>
+                        <th>Kỳ vọng trải nghiệm tự động hóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Đặt sân thể thao nội khu</strong></td>
+                        <td>Tra cứu sân trống theo thời gian thực tại khu vực Đa Tốn (Ocean Park), đặt và giữ sân trực tiếp qua chat.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Thủ tục thẻ cư dân</strong></td>
+                        <td>Hướng dẫn hồ sơ, biểu mẫu điện tử và tiếp nhận yêu cầu cấp lại thẻ mất cho khách thuê một cách số hóa.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Thanh toán lệ phí</strong></td>
+                        <td>Trực quan hóa biểu phí (55,000 VNĐ) và cho phép thanh toán 1-click qua ví điện tử liên kết.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SLIDE 2: KỊCH BẢN CHAT THỰC TẾ -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1>2. Kịch Bản Khảo Sát Tương Tác Thực Tế</h1>
+                <span class="slide-tag">Ngữ cảnh hội thoại</span>
+            </div>
+            <p>Dưới đây là các chuỗi câu hỏi thực tế được kiểm thử trực tiếp với trợ lý V-AI nhằm đánh giá mức độ thấu hiểu ngữ cảnh địa phương:</p>
+
+            <div class="card">
+                <h4><i class="fa-solid fa-magnifying-glass"></i> Tình huống 1: Đặt sân Tennis tại Đa Tốn</h4>
+                <div class="prompt-box">"Tôi muốn đặt sân tennis ở khu vực Đa Tốn vào cuối tuần này. Hệ thống có sân nào trống không và làm sao để đăng ký?"</div>
+            </div>
+            
+            <div class="card">
+                <h4><i class="fa-solid fa-id-card"></i> Tình huống 2: Cấp lại thẻ cư dân bị mất (Đối tượng khách thuê)</h4>
+                <div class="prompt-box">"Tôi là khách thuê nhà ở tòa S2.17 Vinhomes Ocean Park, hiện tại tôi bị mất thẻ cư dân. Thủ tục cấp lại như thế nào, có mất phí không và nộp hồ sơ ở đâu?"</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: HÀNH VI VÀ ĐIỂM GÃY -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1>3. Hành Vi Quan Sát & Điểm Gãy (As-Is)</h1>
+                <span class="slide-tag">Phân tích lỗi hệ thống</span>
+            </div>
+
+            <div class="card danger">
+                <h4><i class="fa-solid fa-link-slash"></i> Điểm gãy 1: Trả kết quả dạng Web-Scraper (Tác vụ Đặt Sân)</h4>
+                <p>Thay vì truy vấn cơ sở dữ liệu sân trống nội khu của Vingroup, V-AI hoạt động như một bộ máy tìm kiếm thông thường. AI điều hướng người dùng gọi hotline hoặc truy cập vào trang web bên thứ ba <strong>thegioithethao.vn</strong> để tự liên hệ. Luồng trải nghiệm bị đứt gãy hoàn toàn.</p>
+            </div>
+
+            <div class="card danger">
+                <h4><i class="fa-solid fa-file-invoice"></i> Điểm gãy 2: Quy trình hành chính thủ công (Tác vụ Thẻ Cư Dân)</h4>
+                <p>AI đưa ra thông tin chính xác về địa điểm (Văn phòng ban quản lý tại tầng 1 tòa S2.17) và mức phí (55,000 VNĐ/thẻ). Tuy nhiên, thay vì cung cấp form đăng ký online, AI yêu cầu cư dân chuẩn bị giấy tờ vật lý (Hợp đồng thuê nhà, CMND/CCCD) đem nộp trực tiếp.</p>
+            </div>
+
+            <div class="card danger">
+                <h4><i class="fa-solid fa-credit-card"></i> Điểm gãy 3: Hướng dẫn thanh toán rời rạc</h4>
+                <p>Đối với khoản lệ phí 55k, trợ lý thông minh chỉ dừng lại ở việc đưa ra thông tin bằng text, hướng dẫn cư dân thực hiện chuyển khoản ngân hàng thủ công hoặc đóng tiền mặt tại quầy, hoàn toàn chưa tích hợp cổng thanh toán trực tuyến nội bộ.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: MA TRẬN LUỒNG -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1>4. Khảo Sát Trải Nghiệm Qua Ma Trận 4 Luồng</h1>
+                <span class="slide-tag">UX Evaluation</span>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 25%;">Loại Luồng (Path)</th>
+                        <th>Trạng thái ghi nhận thực tế trên V-AI</th>
+                        <th style="width: 15%;">Đánh giá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong style="color: var(--success);">Happy Path</strong></td>
+                        <td>AI cung cấp đúng địa chỉ Ban quản lý S2.17 và mức giá quy định 55,000 VNĐ đối với trường hợp mất thẻ.</td>
+                        <td><span class="slide-tag" style="background:#d1fae5; color:var(--success);">Đạt yêu cầu</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--secondary);">Low-Confidence Path</strong></td>
+                        <td>Khi không rõ tình trạng đặt sân nội khu, AI tự động đẩy link web ngoài (thegioithethao) thay vì báo chưa kết nối dữ liệu.</td>
+                        <td><span class="slide-tag" style="background:#fef3c7; color:var(--secondary);">Chưa tốt</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: var(--danger);">Failure Path</strong></td>
+                        <td>Thiếu cơ chế xử lý khi thông tin hotline Ban quản lý thay đổi hoặc khi các trang web bên thứ ba bị lỗi link/đổi domain.</td>
+                        <td><span class="slide-tag" style="background:#fee2e2; color:var(--danger);">Rủi ro cao</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong style="color: #6b7280;">Correction Path</strong></td>
+                        <td>User không thể cập nhật lại trạng thái (Ví dụ: "Tôi đã đổi sang tòa khác thuê" hoặc "Tôi muốn thanh toán luôn") trực tiếp trên UI chat.</td>
+                        <td><span class="slide-tag" style="background:#f3f4f6; color:#6b7280;">Thiếu sót</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SLIDE 5: THÀNH QUYẾT ĐỊNH PRODUCT -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1>5. Từ Finding Đến Quyết Định Product</h1>
+                <span class="slide-tag">Chiến lược giải pháp</span>
+            </div>
+
+            <div class="grid-2">
+                <div class="card success">
+                    <h4><i class="fa-solid fa-calendar-check"></i> 1. Chuyển dịch từ "Information Providing" sang "Action Executing"</h4>
+                    <p><strong>Vấn đề:</strong> AI chỉ biết đưa số điện thoại hoặc link web ngoài.</p>
+                    <p><strong>Quyết định:</strong> Tích hợp sâu API hệ thống quản lý sân thể thao nội khu vào V-AI. Biến câu thoại thành hành động hiển thị lưới giờ trống trực quan.</p>
+                </div>
+                <div class="card success">
+                    <h4><i class="fa-solid fa-folder-open"></i> 2. Số hóa biểu mẫu hành chính (In-app Form Processing)</h4>
+                    <p><strong>Vấn đề:</strong> Bắt cư dân mang giấy tờ photo ra sảnh S2.17.</p>
+                    <p><strong>Quyết định:</strong> Khi nhận diện ý định "làm lại thẻ", AI tự động trích xuất thông tin user từ profile, hiển thị form upload ảnh chụp CCCD/Hợp đồng thuê ngay trên khung chat.</p>
+                </div>
+            </div>
+
+            <div class="card success" style="margin-top: 16px;">
+                <h4><i class="fa-solid fa-wallet"></i> 3. Nhúng Cổng Thanh Toán Trực Tiếp (In-chat Payment Trigger)</h4>
+                <p><strong>Quyết định:</strong> Thay vì bảo cư dân chuyển khoản ngân hàng thủ công, V-AI sẽ sinh ra một thẻ hóa đơn (Invoice Card) kèm nút "Thanh toán ngay bằng VinPay / Thẻ thành viên" với số tiền định cấu hình sẵn 55,000 VNĐ.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: LUỒNG TO-BE LÝ TƯỞNG -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1>6. Thiết Kế Luồng Trải Nghiệm Mới (To-Be Flow)</h1>
+                <span class="slide-tag">Sơ đồ tương tác tương lai</span>
+            </div>
+            <p>Mô hình hóa luồng xử lý tự động toàn diện nhằm khắc phục triệt để các hạn chế:</p>
+
+            <div class="grid-2">
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 10px;"><i class="fa-solid fa-table-tennis-paddle-ball"></i> Luồng Mới: Đặt sân Tennis nội khu</h4>
+                    <div class="flow-container">
+                        <div class="flow-step"><i class="step-icon fa-solid fa-comment"></i> User: "Tôi muốn đặt sân tennis tại Đa Tốn"</div>
+                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="flow-step"><i class="step-icon fa-solid fa-database"></i> AI gọi API nội bộ kiểm tra trạng thái sân trống thực tế</div>
+                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="flow-step" style="background: #ecfdf5; border-color: var(--success);"><i class="step-icon fa-solid fa-calendar-days" style="background: var(--success);"></i> Hiển thị Widget chọn khung giờ trống trực tiếp trong chat</div>
+                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="flow-step"><i class="step-icon fa-solid fa-circle-check"></i> Xác nhận giữ chỗ thành công & trừ điểm VinID</div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 10px;"><i class="fa-solid fa-address-card"></i> Luồng Mới: Cấp lại thẻ cư dân (S2.17)</h4>
+                    <div class="flow-container">
+                        <div class="flow-step"><i class="step-icon fa-solid fa-comment"></i> User thông báo bị mất thẻ cư dân tòa S2.17</div>
+                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="flow-step" style="background: #fffbeb; border-color: var(--secondary);"><i class="step-icon fa-solid fa-upload" style="background: var(--secondary);"></i> AI mở khu vực tải lên tài liệu (CCCD, HĐ Thuê) bảo mật</div>
+                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="flow-step"><i class="step-icon fa-solid fa-credit-card"></i> Hiển thị hóa đơn lệ phí 55.000đ kèm nút thanh toán số</div>
+                        <div class="flow-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                        <div class="flow-step"><i class="step-icon fa-solid fa-bell"></i> Chuyển hồ sơ duyệt tự động, gửi thông báo hẹn ngày lấy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: SPEC CHANGES -->
+        <div class="slide">
+            <div class="slide-header">
+                <h1>7. Đề Xuất Sửa Đổi Product Requirement Spec (PRD)</h1>
+                <span class="slide-tag">Yêu cầu kỹ thuật hệ thống</span>
+            </div>
+            
+            <div class="card" style="border-left-color: var(--primary);">
+                <strong>[PRD-REQ-001] Native Booking Engine Constraint</strong>
+                <p style="margin-top: 6px; font-size: 14px; color: var(--text-muted);">Nghiêm cấm trả về liên kết dẫn sang các website đặt lịch thể thao của bên thứ ba nếu dịch vụ đó có cơ sở hạ tầng thuộc quản lý nội khu. Toàn bộ thông tin lịch sân phải được đồng bộ qua API Gateway nội bộ.</p>
+            </div>
+
+            <div class="card" style="border-left-color: var(--primary);">
+                <strong>[PRD-REQ-002] Document Attachment Component</strong>
+                <p style="margin-top: 6px; font-size: 14px; color: var(--text-muted);">Phát triển thành phần UI (Component) cho phép đính kèm tệp trực tiếp trong hội thoại chat, hỗ trợ quét OCR tự động chứng minh nhân dân/thẻ căn cước để đối chiếu với danh sách khách thuê đã đăng ký tạm trú.</p>
+            </div>
+
+            <div class="card" style="border-left-color: var(--primary);">
+                <strong>[PRD-REQ-003] In-App Payment Context Gateway</strong>
+                <p style="margin-top: 6px; font-size: 14px; color: var(--text-muted);">Khi luồng xử lý nhận diện số tiền lệ phí cố định (như phí 55,000 VNĐ cấp lại thẻ), hệ thống bắt buộc phải khởi tạo một Deep-link kết nối trực tiếp đến Ví điện tử tích hợp để hoàn tất giao dịch mà không bắt người dùng nhập tay thông tin tài khoản ngân hàng.</p>
+            </div>
+        </div>
+
+        <!-- CONTROLS -->
+        <div class="slide-controls">
+            <button class="btn-ctrl" onclick="changeSlide(-1)"><i class="fa-solid fa-chevron-left"></i> Trước</button>
+            <button class="btn-ctrl" onclick="changeSlide(1)">Sau <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FOR NAVIGATION -->
+    <script>
+        let currentSlideIdx = 0;
+        const slides = document.querySelectorAll('.slide');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        function showSlide(index) {
+            if (index < 0 || index >= slides.length) return;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            navItems[index].classList.add('active');
+            currentSlideIdx = index;
+            
+            document.querySelector('.main-content').scrollTop = 0;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlideIdx + direction);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') {
+                changeSlide(1);
+            } else if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+    </script>
+</body>
+</html>
